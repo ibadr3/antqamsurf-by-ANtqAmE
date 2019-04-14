@@ -1,41 +1,5 @@
 #!/bin/bash
-
-### BEGIN INIT INFO
-# Provides:          anonsurf
-# Required-Start:
-# Required-Stop:
-# Should-Start:
-# Default-Start:
-# Default-Stop:
-# Short-Description: Transparent Proxy through TOR.
-### END INIT INFO
-
-# AnonSurf is inspired by the homonimous module of PenMode, developed by the "Pirates' Crew" in
-# order to make it fully compatible with
-# Parrot  OS and other debian-based systems, and it is part of
-# parrot-anon package.
-#
-#
-# Devs:
-# Lorenzo 'EclipseSpark' Faletra <eclipse@frozenbox.org>
-# Lisetta 'Sheireen' Ferrero <sheireen@frozenbox.org>
-# Francesco 'mibofra'/'Eli Aran'/'SimpleSmibs' Bonanno <mibofra@ircforce.tk> <mibofra@frozenbox.org>
-#
-#
-# anonsurf is free software: you can redistribute it and/or
-# modify it under the terms of the GNU General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-# You can get a copy of the license at www.gnu.org/licenses
-#
-# anonsurf is distributed in the hope that it will be
-# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-# General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Parrot Security OS. If not, see <http://www.gnu.org/licenses/>.
-
+#!--coded by ANtqAmE (ALI QASSEIM)--!#
 
 export BLUE='\033[1;94m'
 export GREEN='\033[1;92m'
@@ -67,47 +31,6 @@ function init {
 	echo -e -n " $GREEN*$BLUE cleaning some dangerous cache elements"
 	bleachbit -c adobe_reader.cache chromium.cache chromium.current_session chromium.history elinks.history emesene.cache epiphany.cache firefox.url_history flash.cache flash.cookies google_chrome.cache google_chrome.history  links2.history opera.cache opera.search_history opera.url_history &> /dev/null
 }
-
-
-function starti2p {
-	echo -e -n " $GREEN*$BLUE starting I2P services$RESETCOLOR\n"
-	service tor stop
-
-	# Modify DNS settings
-	if [ "$resolvconf_support" = false ] 
-	then
-		cp /etc/resolv.conf /etc/resolv.conf.bak;
-		touch /etc/resolv.conf;
-		echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 209.222.18.218' > /etc/resolv.conf;
-		echo -e " $GREEN*$BLUE Modified resolv.conf to use localhost and Private Internet Access DNS$RESETCOLOR\n";
-	else
-		cp /etc/resolvconf/resolv.conf.d/head{,.bak};
-		echo -e 'nameserver 127.0.0.1\nnameserver 209.222.18.222\nnameserver 209.222.18.218' >> /etc/resolvconf/resolv.conf.d/head;
-		echo -e " $GREEN*$BLUE Modified resolvconf to use localhost and Private Internet Access DNS$RESETCOLOR\n";
-		resolvconf -u;
-	fi
-	sudo -u i2psvc i2prouter start
-	sleep 2
-	xdg-open 'http://127.0.0.1:7657/home'
-}
-
-function stopi2p {
-	echo -e -n " $GREEN*$BLUE stopping I2P services\n$RESETCOLOR"
-	sudo -u i2psvc i2prouter stop
-	
-	# restore DNS settings
-	if [ "$resolvconf_support" = false ] 
-	then
-		if [ -e /etc/resolv.conf.bak ]; then
-			rm /etc/resolv.conf
-			cp /etc/resolv.conf.bak /etc/resolv.conf
-		fi
-	else
-		mv /etc/resolvconf/resolv.conf.d/head{.bak,}
-		resolvconf -u
-	fi
-}
-
 
 function ip {
 
@@ -258,15 +181,6 @@ function stop {
 	echo -e " $GREEN*$BLUE Anonymous mode stopped$RESETCOLOR\n"
 }
 
-function change {
-	service tor reload
-	sleep 2
-	echo -e " $GREEN*$BLUE Tor daemon reloaded and forced to change nodes$RESETCOLOR\n"
-}
-
-function status {
-	service tor status
-}
 
 case "$1" in
 	start)
@@ -277,44 +191,10 @@ case "$1" in
 		init
 		stop
 	;;
-	change)
-		change
-	;;
-	status)
-		status
-	;;
 	myip|ip)
 		ip
 	;;
-	starti2p)
-		starti2p
-	;;
-	stopi2p)
-		stopi2p
-	;;
-	restart)
-		$0 stop
-		sleep 1
-		$0 start
-	;;
    *)
-echo -e "
-Parrot AnonSurf Module
-	Usage:
-	$RED┌──[$GREEN$USER$YELLOW@$BLUE`hostname`$RED]─[$GREEN$PWD$RED]
-	$RED└──╼ \$$GREEN"" anonsurf $RED{$GREEN""start$RED|$GREEN""stop$RED|$GREEN""restart$RED|$GREEN""change$RED""$RED|$GREEN""status$RED""}
-	
-	$RED start$BLUE -$GREEN Start system-wide anonymous
-		  tunneling under TOR proxy through iptables	  
-	$RED stop$BLUE -$GREEN Reset original iptables settings
-		  and return to clear navigation
-	$RED restart$BLUE -$GREEN Combines \"stop\" and \"start\" options
-	$RED change$BLUE -$GREEN Changes identity restarting TOR
-	$RED status$BLUE -$GREEN Check if AnonSurf is working properly
-	$RED myip$BLUE -$GREEN Show your current IP address
-	----[ I2P related features ]----
-	$RED starti2p$BLUE -$GREEN Start i2p services
-	$RED stopi2p$BLUE -$GREEN Stop i2p services
 	
 $RESETCOLOR" >&2
 exit 1
