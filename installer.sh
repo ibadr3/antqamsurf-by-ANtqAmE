@@ -47,8 +47,9 @@ dpkg-deb -b kali-anonsurf-deb-src/ kali-anonsurf.deb # Build the deb package
 dpkg -i kali-anonsurf.deb || (apt-get -f install && dpkg -i kali-anonsurf.deb) # this will automatically install the required packages
 
 #############################################################################################
-
+cp /etc/init.d/changeIPauto /usr/bin/changeIPauto && chmod +x /usr/bin/changeIPauto > /dev/null
 mv changeIPauto.sh /etc/init.d/changeIPauto && chmod +x /etc/init.d/changeIPauto > /dev/null
+cp antqamsurf.sh /usr/bin/antqamsurf && chmod +x /usr/bin/antqamsurf > /dev/null
 mv antqamsurf.sh /etc/init.d/antqamsurf && chmod +x /etc/init.d/antqamsurf > /dev/null
 sleep 3.5
 clear
