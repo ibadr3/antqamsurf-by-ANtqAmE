@@ -34,10 +34,10 @@ function init {
 
 function ip {
 
-	echo -e "\nMy ip is:\n"
+	echo -e "$yallow  My ip is:\n"
 	sleep 1
 	curl "http://myexternalip.com/raw" # Had a few issues with FrozenBox giving me the wrong IP address
-	echo -e "\n\n----------------------------------------------------------------------"
+	echo -e "  "
 }
 
 function start {
