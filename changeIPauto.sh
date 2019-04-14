@@ -194,11 +194,7 @@ case "$1" in
 	myip|ip)
 		ip
 	;;
-   *)
-	
-$RESETCOLOR" >&2
-exit 1
-;;
+
 esac
 
 echo -e $RESETCOLOR
