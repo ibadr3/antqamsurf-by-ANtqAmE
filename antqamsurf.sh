@@ -30,7 +30,8 @@ Usage : antqamsurf [option]
 
         use this command to stop :
         antqamsurf stop
-
+        use this command to show your ip :
+        antqamsurf myip || ip
 
         ________________________________________________________________________________
        |          .::        ::.            	       .::             ::.              |
@@ -55,6 +56,21 @@ case "$1" in
        ;;
    stop)
        changeIPauto stop > /dev/null
-       echo  " \e[1;31m [!] Your script {changeip is close} done "
+       echo  " \e[1;31m [!] ANTQAMSURF closed done "
        ;;
+   myip||ip)
+							echo "$cayn
+
+												 █████╗ ███╗   ██╗████████╗ ██████╗  █████╗ ███╗   ███╗███████╗██╗   ██╗██████╗ ███████╗
+												██╔══██╗████╗  ██║╚══██╔══╝██╔═══██╗██╔══██╗████╗ ████║██╔════╝██║   ██║██╔══██╗██╔════╝
+												███████║██╔██╗ ██║   ██║   ██║   ██║███████║██╔████╔██║███████╗██║   ██║██████╔╝█████╗  
+												██╔══██║██║╚██╗██║   ██║   ██║▄▄ ██║██╔══██║██║╚██╔╝██║╚════██║██║   ██║██╔══██╗██╔══╝  
+												██║  ██║██║ ╚████║   ██║   ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████║╚██████╔╝██║  ██║██║     
+												╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝    ╚══▀▀═╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     
+   
+							echo  "$yallow  My ip is:"
+							sleep 1
+							curl "http://myexternalip.com/raw" # Had a few issues with FrozenBox giving me the wrong IP address
+	      echo  " "$nocolor
+							;;
 esac
