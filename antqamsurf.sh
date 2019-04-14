@@ -1,18 +1,18 @@
 #!/usr/bin/bash
 #!--coded by ANtqAmE (ALI QASSEIM)--!#
 ## COLORS ###############
-white="\e[1;37m" 
-red="\e[1;31m" 
-green="\e[1;32m" 
-yallow="\e[1;33m" 
-cayn="\e[1;36m"
-blue="\e[1;34m"
-wrde="\e[1;35m"
-nocolor="\e[0m"
+white="033[1;37m" 
+red="\033[1;31m" 
+green="\033[1;32m" 
+yallow="\033[1;33m" 
+cayn="\033[1;36m"
+blue="\033[1;34m"
+wrde="\033[1;35m"
+nocolor="\033[0m"
 #########################
 resize -s 31 94 > /dev/null
 clear
-echo "$cayn
+echo -e "$cayn
 
  █████╗ ███╗   ██╗████████╗ ██████╗  █████╗ ███╗   ███╗███████╗██╗   ██╗██████╗ ███████╗
 ██╔══██╗████╗  ██║╚══██╔══╝██╔═══██╗██╔══██╗████╗ ████║██╔════╝██║   ██║██╔══██╗██╔════╝
@@ -48,18 +48,18 @@ case "$1" in
          for i in range{1..10000}
          do
          changeIPauto start > /dev/null
-         echo  " \e[1;32m [+] Your ip change done "
+         echo  -e " \e[1;32m [+] Your ip change done "
          sleep 60
          changeIPauto restart > /dev/null
-         echo  " \e[1;32m [+] Your ip change done "
+         echo  -e " \e[1;32m [+] Your ip change done "
          done
        ;;
    stop)
        changeIPauto stop > /dev/null
-       echo  " \e[1;31m [!] ANTQAMSURF closed done "
+       echo  -e " \e[1;31m [!] ANTQAMSURF closed done "
        ;;
    myip||ip)
-	echo "$cayn
+	echo -e "$cayn
 
 	 █████╗ ███╗   ██╗████████╗ ██████╗  █████╗ ███╗   ███╗███████╗██╗   ██╗██████╗ ███████╗
 	██╔══██╗████╗  ██║╚══██╔══╝██╔═══██╗██╔══██╗████╗ ████║██╔════╝██║   ██║██╔══██╗██╔════╝
@@ -68,9 +68,9 @@ case "$1" in
 	██║  ██║██║ ╚████║   ██║   ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████║╚██████╔╝██║  ██║██║     
 	╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝    ╚══▀▀═╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     
    
-	echo  "$yallow  My ip is:"
+	echo  -e "$yallow  My ip is:"
 	sleep 1
-	curl "http://myexternalip.com/raw" # Had a few issues with FrozenBox giving me the wrong IP address
-	echo  " "$nocolor
-	;;						;;
+	curl "http://myexternalip.com/raw" 
+	echo  -e " "$nocolor
+	;;
 esac
